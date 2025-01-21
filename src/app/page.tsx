@@ -41,11 +41,19 @@ export default function Home() {
     getMovie();
     console.log("movie");
   }, []);
-  // console.log({ movies });
+  console.log({ movies });
   return (
     <div>
-      {movies.map((movie) => {
-        return <div>{movie?.original_title}</div>;
+      {movies?.map((movie, index) => {
+        return (
+          <div key={index}>
+            <p>{movie?.title}</p>
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt="movie.poster_path"
+            />
+          </div>
+        );
       })}
     </div>
   );

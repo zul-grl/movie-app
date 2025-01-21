@@ -3,12 +3,12 @@ import { ArrowRight } from "lucide-react";
 import { Movietype } from "../_util/type";
 import { Card } from "./Card";
 
-const Popular = ({ movies }: { movies: Movietype[] }) => {
+const Upcoming = ({ movies }: { movies: Movietype[] }) => {
   return (
     <div className="max-w-[1280px] m-auto">
       <div className="flex justify-between">
-        <h3 className="text-[24px] font-semibold">Popular</h3>
-        <Link href="/popular" className="flex items-center cursor-pointer">
+        <h3 className="text-[24px] font-semibold">Upcoming</h3>
+        <Link href="/upcoming" className="flex items-center cursor-pointer">
           See more <ArrowRight className="ml-2" />
         </Link>
       </div>
@@ -21,4 +21,4 @@ const Popular = ({ movies }: { movies: Movietype[] }) => {
   );
 };
 
-export default Popular;
+export default Upcoming;

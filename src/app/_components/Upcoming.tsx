@@ -8,7 +8,7 @@ const Upcoming = ({ movies }: { movies: Movietype[] }) => {
     <div className="max-w-[1280px] m-auto">
       <div className="flex justify-between">
         <h3 className="text-[24px] font-semibold">Upcoming</h3>
-        <Link href="/upcoming" className="flex items-center cursor-pointer">
+        <Link href="/category/upcoming" className="flex items-center cursor-pointer">
           See more <ArrowRight className="ml-2" />
         </Link>
       </div>

@@ -1,19 +1,34 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@radix-ui/react-dropdown-menu";
 import { ChevronDown, Moon, Search, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import { GenreType } from "../_util/type";
+import response from "../_util/response";
 
 const Header = () => {
-  const { setTheme } = useTheme();
-
-  // function toggle() {
-
-  //   return a;
-  // }
-
+  const { theme, setTheme } = useTheme();
+  const [genres, setGenres] = useState<GenreType[] | undefined>([]);
+  useEffect(() => {
+    const fetchGenres = async () => {
+      const data = await response("/genre/movie/list?language=en");
+      setGenres(data.genres);
+    };
+    fetchGenres();
+  }, []);
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
   return (
-    <div className="flex w-[100vw] justify-center h-[59px] sticky top-0 bg-[#fff] z-10">
+    <Card className="flex w-[100vw] justify-center h-[59px] sticky top-0 z-10">
       <div className="max-w-[1280px] w-[100%] flex items-center justify-between">
         <div className="flex">
           <svg
@@ -33,20 +48,29 @@ const Header = () => {
           <h4 className="italic font-bold text-[#4338CA]">Movie Z</h4>
         </div>
         <div className="flex gap-3">
-          <Button>
-            <ChevronDown />
-            Genre
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">
+                <ChevronDown />
+                Genre
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              {/* {genres?.map((genre) => (
+                <DropdownMenuItem key={genre.id}>{genre.name}</DropdownMenuItem>
+              ))} */}
+            </DropdownMenuContent>
+          </DropdownMenu>
           <div className="flex items-center">
             <Input></Input>
           </div>
         </div>
-        <Button onClick={() => setTheme("dark")} variant="outline" size="icon">
+        <Button onClick={toggleTheme} variant="outline" size="icon">
           <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
         </Button>
       </div>
-    </div>
+    </Card>
   );
 };
 export default Header;

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Movietype } from "../_util/type";
-import { Card } from "./Card";
+import { MovieCard } from "./MovieCard";
 
 const Popular = ({ movies }: { movies: Movietype[] }) => {
   return (
@@ -17,7 +17,7 @@ const Popular = ({ movies }: { movies: Movietype[] }) => {
       </div>
       <div className="grid grid-cols-5 gap-[32px] mt-[32px]">
         {movies.map((movie: Movietype, index: number) => (
-          <Card movie={movie} index={index} />
+          <MovieCard movie={movie} index={index} />
         ))}
       </div>
     </div>

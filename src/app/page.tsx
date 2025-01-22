@@ -1,5 +1,6 @@
 import Footer from "./_components/Footer";
 import Header from "./_components/Header";
+import NowPlaying from "./_components/NowPlaying";
 import Popular from "./_components/Popular";
 import Toprated from "./_components/Toprated";
 import Upcoming from "./_components/Upcoming";
@@ -14,6 +15,7 @@ export default async function Home() {
   return (
     <div className="h-full w-full">
       <Header />
+      <NowPlaying />
       <div className="my-[52px] flex flex-col gap-[52px] relative">
         <Upcoming movies={upcomingMovies} />
         <Popular movies={popularMovies} />

@@ -14,7 +14,7 @@ export default async function Home() {
   return (
     <div className="h-full w-full">
       <Header />
-      <div className="py-[52px] flex flex-col gap-[52px] relative">
+      <div className="my-[52px] flex flex-col gap-[52px] relative">
         <Upcoming movies={upcomingMovies} />
         <Popular movies={popularMovies} />
         <Toprated movies={topRatedMovies} />

@@ -1,3 +1,4 @@
+import Footer from "@/app/_components/Footer";
 import Header from "@/app/_components/Header";
 import Popular from "@/app/_components/Popular";
 import response from "@/app/_util/response";
@@ -9,7 +10,10 @@ export default async function PopularPage() {
   return (
     <div>
       <Header />
-      <Popular movies={movies} />
+      <div className="my-[52px]">
+        <Popular movies={movies} />
+      </div>
+      <Footer />
     </div>
   );
 }

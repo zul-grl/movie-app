@@ -1,3 +1,4 @@
+import Footer from "@/app/_components/Footer";
 import Header from "@/app/_components/Header";
 import Upcoming from "@/app/_components/Upcoming";
 import response from "@/app/_util/response";
@@ -9,7 +10,10 @@ export default async function UpcomingPage() {
   return (
     <div>
       <Header />
-      <Upcoming movies={movies} />
+      <div className="my-[52px]">
+        <Upcoming movies={movies} />
+      </div>
+      <Footer />
     </div>
   );
 }

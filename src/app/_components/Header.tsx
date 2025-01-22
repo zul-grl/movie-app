@@ -1,6 +1,17 @@
-import { ChevronDown, Search } from "lucide-react";
+"use client";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ChevronDown, Moon, Search, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 
 const Header = () => {
+  const { setTheme } = useTheme();
+
+  // function toggle() {
+
+  //   return a;
+  // }
+
   return (
     <div className="flex w-[100vw] justify-center h-[59px] sticky top-0 bg-[#fff] z-10">
       <div className="max-w-[1280px] w-[100%] flex items-center justify-between">
@@ -22,30 +33,18 @@ const Header = () => {
           <h4 className="italic font-bold text-[#4338CA]">Movie Z</h4>
         </div>
         <div className="flex gap-3">
-          <button className="text-14 py-2 px-4 flex gap-2 rounded-md border border-[#E4E4E7]">
+          <Button>
             <ChevronDown />
             Genre
-          </button>
-          <div className="flex items-center rounded-md border border-[#E4E4E7]">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="25"
-              height="25"
-              viewBox="0 0 16 17"
-              fill="none"
-            >
-              <g opacity="0.5">
-                <path
-                  d="M13.711 14.2105L13.3575 13.8568C13.3444 13.8699 13.3232 13.8699 13.3101 13.8568L10.2834 10.83L9.96699 10.5136L9.61753 10.7932C8.88184 11.3817 7.94958 11.7333 6.93379 11.7333C4.55897 11.7333 2.63379 9.80812 2.63379 7.4333C2.63379 5.05848 4.55897 3.1333 6.93379 3.1333C9.30861 3.1333 11.2338 5.05848 11.2338 7.4333C11.2338 8.44909 10.8822 9.38136 10.2937 10.117L10.0141 10.4665L10.3305 10.783L13.3573 13.8096C13.3704 13.8227 13.3704 13.8439 13.3573 13.857L13.711 14.2105ZM13.711 14.2105C13.9192 14.0022 13.9192 13.6644 13.711 13.4561L12.9566 14.2105C13.1649 14.4187 13.5026 14.4187 13.711 14.2105ZM6.93379 11.6666C9.2718 11.6666 11.1671 9.77131 11.1671 7.4333C11.1671 5.09529 9.2718 3.19997 6.93379 3.19997C4.59578 3.19997 2.70046 5.09529 2.70046 7.4333C2.70046 9.77131 4.59578 11.6666 6.93379 11.6666Z"
-                  fill="#09090B"
-                  stroke="#09090B"
-                />
-              </g>
-            </svg>{" "}
-            <input type="text" />
+          </Button>
+          <div className="flex items-center">
+            <Input></Input>
           </div>
         </div>
-        <div></div>
+        <Button onClick={() => setTheme("dark")} variant="outline" size="icon">
+          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+        </Button>
       </div>
     </div>
   );

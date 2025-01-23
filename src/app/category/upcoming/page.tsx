@@ -7,13 +7,5 @@ export default async function UpcomingPage() {
   const data = await response("/movie/upcoming?language=en-US&page=1");
   const movies = data.results;
 
-  return (
-    <div>
-      <Header />
-      <div className="my-[52px]">
-        <Upcoming movies={movies} a={false} />
-      </div>
-      <Footer />
-    </div>
-  );
+  return <Upcoming movies={movies} a={false} />;
 }

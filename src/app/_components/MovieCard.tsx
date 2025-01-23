@@ -10,14 +10,14 @@ export const MovieCard = ({
   index: number;
 }) => {
   return (
-    <Link href={`/details${movie.id}`}>
+    <Link href={`/details/${movie.id}`}>
       <Card
         key={index}
         className="flex-1 hover:opacity-50 transition-all ease-in rounded-xl overflow-hidden"
       >
-        <div className="h-[340px] overflow-hidden">
+        <div className="max-h-[340px] overflow-hidden">
           <Image
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
             alt={movie.title}
             width={1000}
             height={1000}

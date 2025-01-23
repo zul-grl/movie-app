@@ -7,13 +7,5 @@ export default async function TopRatedPage() {
   const data = await response("/movie/top_rated?language=en-US&page=1");
   const movies = data.results;
 
-  return (
-    <div>
-      <Header />
-      <div className="my-[52px]">
-        <Toprated movies={movies} a={false} />
-      </div>
-      <Footer />
-    </div>
-  );
+  return <Toprated movies={movies} a={false} />;
 }

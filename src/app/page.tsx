@@ -14,14 +14,12 @@ export default async function Home() {
   const topRatedMovies = topRatedData.results.slice(0, 10);
   return (
     <div className="h-full w-full">
-      <Header />
       <NowPlaying />
-      <div className="my-[52px] flex flex-col gap-[52px] relative">
+      <div className="mb-[52px] flex flex-col relative">
         <Upcoming movies={upcomingMovies} a={true} />
         <Popular movies={popularMovies} a={true} />
         <Toprated movies={topRatedMovies} a={true} />
       </div>
-      <Footer />
     </div>
   );
 }

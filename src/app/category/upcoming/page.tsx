@@ -11,7 +11,7 @@ export default async function UpcomingPage() {
     <div>
       <Header />
       <div className="my-[52px]">
-        <Upcoming movies={movies} />
+        <Upcoming movies={movies} a={false} />
       </div>
       <Footer />
     </div>

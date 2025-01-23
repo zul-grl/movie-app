@@ -11,7 +11,7 @@ export default async function TopRatedPage() {
     <div>
       <Header />
       <div className="my-[52px]">
-        <Toprated movies={movies} />
+        <Toprated movies={movies} a={false} />
       </div>
       <Footer />
     </div>

@@ -1,4 +1,3 @@
-
 export type Movietype = {
   adult: boolean;
   backdrop_path: string;
@@ -19,4 +18,3 @@ export type GenreType = {
   id: number;
   name: string;
 };
-

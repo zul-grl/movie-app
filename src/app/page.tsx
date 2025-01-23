@@ -17,9 +17,9 @@ export default async function Home() {
       <Header />
       <NowPlaying />
       <div className="my-[52px] flex flex-col gap-[52px] relative">
-        <Upcoming movies={upcomingMovies} />
-        <Popular movies={popularMovies} />
-        <Toprated movies={topRatedMovies} />
+        <Upcoming movies={upcomingMovies} a={true} />
+        <Popular movies={popularMovies} a={true} />
+        <Toprated movies={topRatedMovies} a={true} />
       </div>
       <Footer />
     </div>

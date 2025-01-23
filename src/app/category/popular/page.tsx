@@ -11,7 +11,7 @@ export default async function PopularPage() {
     <div>
       <Header />
       <div className="my-[52px]">
-        <Popular movies={movies} />
+        <Popular movies={movies} a={false} />
       </div>
       <Footer />
     </div>

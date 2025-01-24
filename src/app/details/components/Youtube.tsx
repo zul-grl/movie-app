@@ -1,0 +1,36 @@
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Play } from "lucide-react";
+const Youtube = async ({ videodata }: { videodata: any }) => {
+  return (
+    <Dialog>
+      <DialogTrigger>
+        <div className="flex items-center gap-3 bottom-3 left-130 absolute">
+          <div className="bg-white border-none p-2 rounded-full ">
+            <Play color="black" />
+          </div>
+          <p>Play trailer</p>
+        </div>
+      </DialogTrigger>
+
+      <DialogContent>
+        <iframe
+          width="560"
+          height="315"
+          src={`https://www.youtube.com/embed/${videodata.key}`}
+        ></iframe>
+        <DialogHeader>
+          <DialogTitle></DialogTitle>
+          <DialogDescription></DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+  );
+};
+export default Youtube;

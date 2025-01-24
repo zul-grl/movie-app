@@ -1,26 +1,25 @@
-import Footer from "@/app/_components/Footer";
-import Header from "@/app/_components/Header";
 import Similar from "@/app/_components/Similar";
 import { formatRuntime } from "@/app/_util/constant";
 import response from "@/app/_util/response";
-import { credittype, detailtype, Movietype } from "@/app/_util/type";
+import { credittype, detailtype } from "@/app/_util/type";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { url } from "inspector";
-import { Link, Play } from "lucide-react";
 import Image from "next/image";
+import Youtube from "../components/Youtube";
 
 const page = async ({ params }: { params: { moviesid: string } }) => {
   const movieid = params.moviesid;
   const data: detailtype = await response(`/movie/${movieid}?language=en-US`);
-  const credits: any = await response(
-    `/movie/${movieid}/credits?language=en-US`
-  );
+  const credits = await response(`/movie/${movieid}/credits?language=en-US`);
+  const crew: credittype[] = credits.crew;
+  const director = crew;
   const similarMovies = await response(
     `/movie/${movieid}/similar?language=en-US&page=1`
   );
+  const videosdata = await response(`/movie/${movieid}/videos?language=en-US`);
+  const videodata = videosdata.results[0];
   const similar = similarMovies.results.slice(0, 5);
-  // console.log(credits);
+  console.log(crew);
+
   return (
     <div>
       <div className="max-w-[1080px] py-[52px] m-auto flex flex-col">
@@ -58,7 +57,7 @@ const page = async ({ params }: { params: { moviesid: string } }) => {
             </div>
           </div>
         </div>
-        <div className="flex gap-8 h-[524px]">
+        <div className="flex gap-8 w-full h-[524px] relative">
           <Image
             width={1000}
             height={1000}
@@ -66,23 +65,17 @@ const page = async ({ params }: { params: { moviesid: string } }) => {
             src={`https://image.tmdb.org/t/p/original${data.poster_path}`}
             className="max-w-[290px] object-cover rounded-xl"
           ></Image>
-          <div className="relative max-w-[760px] overflow-hidden rounded-xl">
+          <div>
             <Image
               width={1000}
               height={1000}
               alt=""
               src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`}
-              className="w-[100%] h-[100%] object-cover"
-            ></Image>
-            <div className="flex items-center gap-2 left-3 bottom-3 absolute">
-              <button className="bg-white border-none rounded-full p-2">
-                <Play color="black" />
-              </button>
-              Play trailer
-            </div>
+              className="object-cover rounded-xl h-[524px]"
+            />
+            <Youtube videodata={videodata} />
           </div>
         </div>
-
         <div className="flex flex-col gap-6">
           <div className="mt-6 flex gap-3">
             {data.genres.map((genre) => {

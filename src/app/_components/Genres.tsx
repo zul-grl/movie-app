@@ -23,9 +23,12 @@ const Genre = async () => {
           <div>See lists of movies by genre</div>
           <div className="border border-[#27272A] my-2"></div>
           <div className="flex flex-wrap gap-4">
-            {genreMovies?.map((genre: GenreType) => {
+            {genreMovies?.map((genre: GenreType, index: number) => {
               return (
-                <button className="flex text-[12px] rounded-full border justify-center items-center border-[#27272A] py-[2px] px-2">
+                <button
+                  key={index}
+                  className="flex text-[12px] rounded-full border justify-center items-center border-[#27272A] py-[2px] px-2"
+                >
                   {genre.name} <ChevronRight className="w-4 h-4" />
                 </button>
               );

@@ -14,29 +14,41 @@ import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import Youtube from "../details/components/Youtube";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
   DialogTrigger,
 } from "@/components/ui/dialog";
 
 const NowPlaying = () => {
   const [movies, setMovies] = useState<Movietype[] | undefined>([]);
+  const [videoKeys, setVideoKeys] = useState<{ [key: number]: string }>({});
+
   useEffect(() => {
-    const fetchmovie = async () => {
+    const fetchMovies = async () => {
       const data = await response("/movie/now_playing?language=en-US&page=1");
       setMovies(data.results);
+
+      const keys: { [key: number]: string } = {};
+      for (const movie of data.results) {
+        const videos = await response(`/movie/${movie.id}/videos?language=en-US`);
+        if (videos.results.length > 0) {
+          keys[movie.id] = videos.results[0].key;
+        }
+      }
+      setVideoKeys(keys);
     };
-    fetchmovie();
+
+    fetchMovies();
   }, []);
-  console.log(movies);
+
   const plugin = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   );
+
   return (
     <Carousel
       plugins={[plugin.current]}
@@ -44,19 +56,19 @@ const NowPlaying = () => {
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
-      <CarouselContent className="h-[600px] w-[100vw] ">
+      <CarouselContent className="h-[600px] w-[100vw]">
         {movies?.map((movie, index) => (
           <CarouselItem key={index}>
             <Link href={`/details/${movie.id}`}>
               <Image
                 src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-                width={1000}
+                width={10000}
                 height={1000}
                 alt=""
                 className="relative w-full"
               />
             </Link>
-            <div className="w-[404px] h-[264px]  text-white flex gap-4 flex-col absolute left-[140px] bottom-[158px]">
+            <div className="w-[404px] h-[264px] text-white flex gap-4 flex-col absolute left-[140px] bottom-[158px]">
               <p>Now Playing:</p>
               <h1 className="text-[32px]">{movie.title}</h1>
               <div className="flex gap-2">
@@ -91,11 +103,14 @@ const NowPlaying = () => {
                   <iframe
                     width="560"
                     height="315"
-                    src={`https://www.youtube.com/embed/${movie.id}`}
+                    src={`https://www.youtube.com/embed/${videoKeys[movie.id]}`}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
                   ></iframe>
                   <DialogHeader>
                     <DialogTitle></DialogTitle>
-                    <DialogDescription></DialogDescription>
+                    <DialogDescription>
+                    </DialogDescription>
                   </DialogHeader>
                 </DialogContent>
               </Dialog>
@@ -108,4 +123,5 @@ const NowPlaying = () => {
     </Carousel>
   );
 };
+
 export default NowPlaying;

@@ -1,7 +1,7 @@
 import Similar from "@/app/_components/Similar";
 import { formatRuntime } from "@/app/_util/constant";
 import response from "@/app/_util/response";
-import { credittype, detailtype } from "@/app/_util/type";
+import { CastMember, credittype, crewtype, detailtype } from "@/app/_util/type";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Youtube from "../components/Youtube";
@@ -11,13 +11,20 @@ const page = async ({ params }: { params: { moviesid: string } }) => {
   const data: detailtype = await response(`/movie/${movieid}?language=en-US`);
   const credits = await response(`/movie/${movieid}/credits?language=en-US`);
   const crew: credittype[] = credits.crew;
-  const director = crew;
+  const cast = credits.cast;
   const similarMovies = await response(
     `/movie/${movieid}/similar?language=en-US&page=1`
   );
   const videosdata = await response(`/movie/${movieid}/videos?language=en-US`);
   const videodata = videosdata.results[0];
   const similar = similarMovies.results.slice(0, 5);
+  const director = crew.find(
+    (member) => member.known_for_department === "Directing"
+  )?.name;
+  const writers = crew
+    .filter((member) => member.known_for_department === "Writing")
+    .map((writer) => writer.name);
+  const stars = cast.slice(0, 3).map((star: CastMember) => star.name);
   console.log(crew);
 
   return (
@@ -81,6 +88,7 @@ const page = async ({ params }: { params: { moviesid: string } }) => {
             {data.genres.map((genre) => {
               return (
                 <Badge
+                  key={genre.id}
                   variant={"outline"}
                   className="text-[12px] rounded-full border border-[#27272A] py-[2px] px-2"
                 >
@@ -90,14 +98,17 @@ const page = async ({ params }: { params: { moviesid: string } }) => {
             })}
           </div>
           <p>{data.overview}</p>
-          <div className="border-b border-[#E4E4E7]">
+          <div className="border-b flex gap-10 border-[#E4E4E7]">
             <p className="text-[16px] font-semibold">Director</p>
+            <p>{director}</p>
           </div>
-          <div className="border-b border-[#E4E4E7]">
+          <div className="border-b flex gap-10 border-[#E4E4E7]">
             <p className="text-[16px] font-semibold">Writers</p>
+            <p>{writers.join(", ")}</p>
           </div>
-          <div className="border-b border-[#E4E4E7]">
+          <div className="border-b flex gap-12 border-[#E4E4E7]">
             <p className="text-[16px] font-semibold">Stars</p>
+            <p>{stars.join(", ")}</p>
           </div>
         </div>
 

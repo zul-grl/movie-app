@@ -11,11 +11,11 @@ const Youtube = async ({ videodata }: { videodata: any }) => {
   return (
     <Dialog>
       <DialogTrigger>
-        <div className="flex items-center gap-3 bottom-3 left-130 absolute">
+        <div className="flex items-center gap-3 bottom-5 left-[340px] absolute">
           <div className="bg-white border-none p-2 rounded-full ">
             <Play color="black" />
           </div>
-          <p>Play trailer</p>
+          <p className="text-white">Play trailer</p>
         </div>
       </DialogTrigger>
 

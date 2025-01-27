@@ -108,3 +108,6 @@ export type crewtype = {
 export type CastMember = {
   name: string;
 };
+export type Keys = {
+  key: string;
+};

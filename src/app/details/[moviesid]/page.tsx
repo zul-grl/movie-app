@@ -24,8 +24,8 @@ const page = async ({ params }: { params: { moviesid: string } }) => {
   const writers = crew
     .filter((member) => member.known_for_department === "Writing")
     .map((writer) => writer.name);
-  const stars = cast.slice(0, 3).map((star: CastMember) => star.name);
-  console.log(crew);
+  const stars = cast.slice(0, 5).map((star: CastMember) => star.name);
+  console.log(cast);
 
   return (
     <div>
@@ -104,11 +104,11 @@ const page = async ({ params }: { params: { moviesid: string } }) => {
           </div>
           <div className="border-b flex gap-10 border-[#E4E4E7]">
             <p className="text-[16px] font-semibold">Writers</p>
-            <p>{writers.join(", ")}</p>
+            <p>{writers.join(" · ")}</p>
           </div>
           <div className="border-b flex gap-12 border-[#E4E4E7]">
             <p className="text-[16px] font-semibold">Stars</p>
-            <p>{stars.join(", ")}</p>
+            <p>{stars.join(" · ")}</p>
           </div>
         </div>
 

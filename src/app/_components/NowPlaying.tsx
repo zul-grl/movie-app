@@ -31,13 +31,12 @@ const NowPlaying = () => {
     const fetchMovies = async () => {
       const data = await response("/movie/now_playing?language=en-US&page=1");
       setMovies(data.results);
-
       const keys: { [key: number]: string } = {};
       for (const movie of data.results) {
-        const videos = await response(`/movie/${movie.id}/videos?language=en-US`);
-        if (videos.results.length > 0) {
-          keys[movie.id] = videos.results[0].key;
-        }
+        const videosdata = await response(
+          `/movie/${movie.id}/videos?language=en-US`
+        );
+        keys[movie.id] = videosdata.results[0].key;
       }
       setVideoKeys(keys);
     };
@@ -109,8 +108,7 @@ const NowPlaying = () => {
                   ></iframe>
                   <DialogHeader>
                     <DialogTitle></DialogTitle>
-                    <DialogDescription>
-                    </DialogDescription>
+                    <DialogDescription></DialogDescription>
                   </DialogHeader>
                 </DialogContent>
               </Dialog>

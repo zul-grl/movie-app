@@ -2,6 +2,7 @@ import { Toggle } from "@radix-ui/react-toggle";
 import { GenreType } from "../_util/type";
 import { ChevronRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import Link from "next/link";
 
 const Allgenres = ({ genreMovies }: { genreMovies: GenreType[] }) => {
   return (
@@ -12,12 +13,11 @@ const Allgenres = ({ genreMovies }: { genreMovies: GenreType[] }) => {
       <div className="flex flex-wrap gap-4">
         {genreMovies?.map((genre: GenreType, index: number) => {
           return (
-            <Toggle
-              key={index}
-              className="flex text-[12px] rounded-full border justify-center items-center border-[#27272A] py-[2px] px-2"
-            >
-              {genre.name} <ChevronRight className="w-4 h-4" />
-            </Toggle>
+            <Link href={`/genre/${genre.id}`} key={genre.id}>
+              <Toggle className="flex text-[12px] rounded-full border justify-center items-center border-[#27272A] py-[2px] px-2">
+                {genre.name} <ChevronRight className="w-4 h-4" />
+              </Toggle>
+            </Link>
           );
         })}
       </div>

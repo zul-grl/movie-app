@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { ToggleTheme } from "./theme-provider";
 import Genre from "./Genres";
 import Link from "next/link";
+import Search from "./Search";
 
 const Header = () => {
   return (
@@ -29,9 +30,7 @@ const Header = () => {
         </Link>
         <div className="flex gap-3">
           <Genre />
-          <div className="flex items-center">
-            <Input></Input>
-          </div>
+          <Search />
         </div>
         <ToggleTheme />
       </div>

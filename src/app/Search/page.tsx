@@ -3,27 +3,28 @@ import { MovieCard } from "../_components/MovieCard";
 import response from "../_util/response";
 import { Movietype } from "../_util/type";
 import SearchGenres from "../_components/SearchGenres";
-
-import { PaginationDemo } from "../_components/Pagination";
+import CustomPagination from "../_components/CustomPagination";
 
 const SearchPage = async ({
   searchParams,
 }: {
-  searchParams: { searchValue: string; genres: string };
+  searchParams: { searchValue: string; genres: string; page?: string };
 }) => {
-  const searchValue = searchParams.searchValue;
-  const selectedGenres = searchParams.genres
-    ? searchParams.genres.split(",").map(Number)
+  const params = await searchParams;
+  const searchValue = params.searchValue;
+  const selectedGenres = params.genres
+    ? params.genres.split(",").map(Number)
     : [];
-
+  const totalPages = 500;
+  const page = Number(params.page) || 1;
   const data = await response(
-    `/search/movie?query=${searchValue}&language=en-US`
+    `/search/movie?query=${searchValue}&language=en-US&page=${page}`
   );
   const movies: Movietype[] = data.results;
   const filteredMovies =
     selectedGenres.length > 0
       ? movies.filter((movie) =>
-          movie.genre_ids.some((genreId) => selectedGenres.includes(genreId))
+          movie.genre_ids.every((genreId) => selectedGenres.includes(genreId))
         )
       : movies;
   const genreData = await response("/genre/movie/list?language=en");
@@ -51,7 +52,9 @@ const SearchPage = async ({
             <SearchGenres genreMovies={genreMovies} />
           </div>
         </Card>
-        <PaginationDemo />
+      </div>
+      <div className="flex justify-center mt-8">
+        <CustomPagination page={page} totalPages={totalPages} />
       </div>
     </div>
   );

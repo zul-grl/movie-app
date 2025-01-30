@@ -1,25 +1,35 @@
+
 import Allgenres from "@/app/_components/Allgenres";
 import { MovieCard } from "@/app/_components/MovieCard";
 import response from "@/app/_util/response";
 import { Movietype } from "@/app/_util/type";
+import CustomPagination from "../_components/CustomPagination";
 
-async function getMovies(genres: string) {
-  return await response(
-    `/discover/movie?language=en&with_genres=${genres}&page=1`
+async function getMovies(genres: string, page: number) {
+  const movies = await response(
+    `/discover/movie?language=en&with_genres=${genres}&page=${page}`
   );
+  return movies;
 }
 
 export default async function GenresPage({
   searchParams,
 }: {
-  searchParams: { genres: string };
+  searchParams: { genres: string; page?: string };
 }) {
-  const selectedGenres = searchParams.genres;
+  const params = await searchParams;
+  const paramPage = params.page;
+  const page = Number(paramPage) || 1;
+
+  const selectedGenres = params.genres;
   const genreData = await response("/genre/movie/list?language=en");
   const genres = genreData.genres || [];
-  const moviesData = selectedGenres ? await getMovies(selectedGenres) : null;
-
+  const moviesData = selectedGenres
+    ? await getMovies(selectedGenres, page)
+    : null;
+  const totalPages = moviesData?.total_pages;
   const movies = moviesData?.results || [];
+  const totalMovies = moviesData?.total_results || 0;
   return (
     <div className="max-w-[1280px] m-auto flex flex-col gap-8 mt-[52px]">
       <h2 className="text-[30px] font-semibold">Search Filter</h2>
@@ -33,7 +43,7 @@ export default async function GenresPage({
           </div>
         </div>
         <div className="flex flex-col gap-8">
-          <h4 className="text-[20px] font-semibold">{movies.length} titles</h4>
+          <h4 className="text-[20px] font-semibold">{totalMovies} titles</h4>
           <div>
             {selectedGenres && (
               <div className="grid grid-cols-4 gap-[32px] max-w-[804px] mt-[32px]">
@@ -51,6 +61,8 @@ export default async function GenresPage({
           </div>
         </div>
       </div>
+
+      <CustomPagination page={page} totalPages={totalPages} />
     </div>
   );
 }

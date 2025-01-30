@@ -1,27 +1,64 @@
+"use client";
 import { Toggle } from "@radix-ui/react-toggle";
 import { GenreType } from "../_util/type";
-import { ChevronRight } from "lucide-react";
-import { Card } from "@/components/ui/card";
-import Link from "next/link";
+import { ChevronRight, X } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
 
 const Allgenres = ({ genreMovies }: { genreMovies: GenreType[] }) => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
+
+  useEffect(() => {
+    const genres = searchParams.get("genres");
+    if (genres) {
+      setSelectedGenres(genres.split(",").map(Number));
+    } else {
+      setSelectedGenres([]);
+    }
+  }, [searchParams]);
+
+  const handleGenreToggle = (genreId: number) => {
+    let newSelectedGenres: number[];
+
+    if (selectedGenres.includes(genreId)) {
+      newSelectedGenres = selectedGenres.filter((id) => id !== genreId);
+    } else {
+      newSelectedGenres = [...selectedGenres, genreId];
+    }
+
+    const params = new URLSearchParams(searchParams.toString());
+    if (newSelectedGenres.length > 0) {
+      params.set("genres", newSelectedGenres.join(","));
+    } else {
+      params.delete("genres");
+    }
+    router.push(`/genres?${params.toString()}`);
+  };
+
   return (
-    <Card className="-left-9 p-5 absolute rounded-md w-[537px] h-[260px]">
-      <h3 className="text-[24px]">Genres</h3>
-      <div>See lists of movies by genre</div>
-      <div className="border border-[#27272A] my-2"></div>
-      <div className="flex flex-wrap gap-4">
-        {genreMovies?.map((genre: GenreType, index: number) => {
-          return (
-            <Link href={`/genre/${genre.id}`} key={genre.id}>
-              <Toggle className="flex text-[12px] rounded-full border justify-center items-center border-[#27272A] py-[2px] px-2">
-                {genre.name} <ChevronRight className="w-4 h-4" />
-              </Toggle>
-            </Link>
-          );
-        })}
+    <div className="space-y-4">
+      <div className="flex flex-wrap gap-2">
+        {genreMovies?.map((genre: GenreType) => (
+          <Toggle
+            key={genre.id}
+            pressed={selectedGenres.includes(genre.id)}
+            onPressedChange={() => handleGenreToggle(genre.id)}
+            className={`flex text-sm rounded-full border items-center px-3 py-1.5 transition-colors
+              ${
+                selectedGenres.includes(genre.id)
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "border-[#27272A] hover:bg-accent"
+              }`}
+          >
+            {genre.name}
+            <ChevronRight className="w-4 h-4 ml-1" />
+          </Toggle>
+        ))}
       </div>
-    </Card>
+    </div>
   );
 };
+
 export default Allgenres;

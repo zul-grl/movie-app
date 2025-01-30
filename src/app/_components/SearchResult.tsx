@@ -3,26 +3,27 @@ import { Movietype } from "@/app/_util/type";
 import { MovieCard } from "@/app/_components/MovieCard";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { CardContent, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 const SearchPage = ({ searchValue }: { searchValue: string }) => {
   const [movies, setMovies] = useState<Movietype[]>([]);
+
   useEffect(() => {
     const fetchMovies = async () => {
       const data = await response(
         `/search/movie?query=${searchValue}&language=en-US&page=1`
       );
       setMovies(data.results);
-      console.log(data);
     };
 
     fetchMovies();
   }, [searchValue]);
+
   return (
     <div>
-      {movies?.slice(0, 5).map((movie: Movietype, index: number) => (
+      {movies?.slice(0, 3).map((movie: Movietype, index: number) => (
         <Link key={index} href={`/details/${movie.id}`}>
           <div className="flex-1 hover:opacity-50 transition-all ease-in rounded-xl overflow-hidden p-2 mt-2">
             <div className="flex gap-4">
@@ -65,7 +66,7 @@ const SearchPage = ({ searchValue }: { searchValue: string }) => {
           </div>
         </Link>
       ))}
-      <Link href={`/Search?${searchValue}`}>
+      <Link href={`/Search?searchValue=${searchValue}`}>
         <p>See all results for "{searchValue}"</p>
       </Link>
     </div>

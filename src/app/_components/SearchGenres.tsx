@@ -4,8 +4,7 @@ import { GenreType } from "../_util/type";
 import { ChevronRight } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
-
-const Allgenres = ({ genreMovies }: { genreMovies: GenreType[] }) => {
+const SearchGenres = ({ genreMovies }: { genreMovies: GenreType[] }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
@@ -34,9 +33,8 @@ const Allgenres = ({ genreMovies }: { genreMovies: GenreType[] }) => {
     } else {
       params.delete("genres");
     }
-    router.push(`/genres?${params.toString()}`);
+    router.push(`/Search?${params.toString()}`);
   };
-
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap gap-2">
@@ -45,11 +43,11 @@ const Allgenres = ({ genreMovies }: { genreMovies: GenreType[] }) => {
             key={genre.id}
             onPressedChange={() => handleGenreToggle(genre.id)}
             className={`flex text-sm rounded-full border items-center px-3 py-1.5 transition-colors
-              ${
-                selectedGenres.includes(genre.id)
-                  ? "bg-primary text-primary-foreground border-primary"
-                  : "border-[#27272A] hover:bg-accent"
-              }`}
+                ${
+                  selectedGenres.includes(genre.id)
+                    ? "bg-primary text-primary-foreground border-primary"
+                    : "border-[#27272A] hover:bg-accent"
+                }`}
           >
             {genre.name}
             <ChevronRight className="w-4 h-4 ml-1" />
@@ -59,5 +57,4 @@ const Allgenres = ({ genreMovies }: { genreMovies: GenreType[] }) => {
     </div>
   );
 };
-
-export default Allgenres;
+export default SearchGenres;

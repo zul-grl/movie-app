@@ -104,7 +104,18 @@ export type crewtype = {
   original_name: string;
   popularity: number;
 };
-
+export type Videotype = {
+  id: string;
+  iso_639_1: string;
+  iso_3166_1: string;
+  key: string;
+  name: string;
+  official: true;
+  published_at: string;
+  site: string;
+  size: number;
+  type: string;
+};
 export type CastMember = {
   name: string;
 };

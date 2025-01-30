@@ -1,3 +1,4 @@
+import { Videotype } from "@/app/_util/type";
 import {
   Dialog,
   DialogContent,
@@ -7,7 +8,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Play } from "lucide-react";
-const Youtube = async ({ videodata }: { videodata: any }) => {
+const Youtube = async ({ videodata }: { videodata: Videotype }) => {
   return (
     <Dialog>
       <DialogTrigger>

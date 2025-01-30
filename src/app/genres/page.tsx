@@ -34,9 +34,7 @@ export default async function GenresPage({
           </div>
         </div>
         <div className="flex flex-col gap-8">
-          <h4 className="text-[20px] font-semibold">
-            {movies.length} results for selected genres
-          </h4>
+          <h4 className="text-[20px] font-semibold">{movies.length} titles</h4>
           <div>
             {selectedGenres && (
               <div className="grid grid-cols-4 gap-[32px] max-w-[804px] mt-[32px]">

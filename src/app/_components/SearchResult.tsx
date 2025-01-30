@@ -1,6 +1,5 @@
 import response from "@/app/_util/response";
 import { Movietype } from "@/app/_util/type";
-import { MovieCard } from "@/app/_components/MovieCard";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { CardContent, CardTitle } from "@/components/ui/card";
@@ -23,7 +22,7 @@ const SearchPage = ({ searchValue }: { searchValue: string }) => {
 
   return (
     <div>
-      {movies?.slice(0, 3).map((movie: Movietype, index: number) => (
+      {movies?.slice(0, 5).map((movie: Movietype, index: number) => (
         <Link key={index} href={`/details/${movie.id}`}>
           <div className="flex-1 hover:opacity-50 transition-all ease-in rounded-xl overflow-hidden p-2 mt-2">
             <div className="flex gap-4">
@@ -38,7 +37,7 @@ const SearchPage = ({ searchValue }: { searchValue: string }) => {
               </div>
               <CardContent className="p-2 bg-background h-[85px]">
                 <CardTitle className="text-lg">{movie.title}</CardTitle>
-                <div className="flex gap-2">
+                <div className="flex flex-col gap-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width={16}
@@ -67,7 +66,9 @@ const SearchPage = ({ searchValue }: { searchValue: string }) => {
         </Link>
       ))}
       <Link href={`/Search?searchValue=${searchValue}`}>
-        <p>See all results for "{searchValue}"</p>
+        <p className="mt-6">
+          See all results for `&quot;`{searchValue}`&quot;`
+        </p>
       </Link>
     </div>
   );

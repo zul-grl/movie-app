@@ -10,7 +10,6 @@ import {
 import React, { useEffect, useState } from "react";
 import response from "../_util/response";
 import { Movietype } from "../_util/type";
-import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";

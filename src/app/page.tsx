@@ -1,5 +1,3 @@
-import Footer from "./_components/Footer";
-import Header from "./_components/Header";
 import NowPlaying from "./_components/NowPlaying";
 import Popular from "./_components/Popular";
 import Toprated from "./_components/Toprated";

@@ -1,5 +1,3 @@
-import Footer from "@/app/_components/Footer";
-import Header from "@/app/_components/Header";
 import Upcoming from "@/app/_components/Upcoming";
 import response from "@/app/_util/response";
 

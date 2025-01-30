@@ -22,7 +22,7 @@ const Toprated = ({ movies, a }: { movies: Movietype[]; a: boolean }) => {
         </div>
         <div className="grid grid-cols-5 gap-[32px] mt-[32px]">
           {movies.map((movie: Movietype, index: number) => (
-            <MovieCard movie={movie} index={index} />
+            <MovieCard movie={movie} key={movie.id} index={index} />
           ))}
         </div>
       </div>

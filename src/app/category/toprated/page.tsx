@@ -1,5 +1,3 @@
-import Footer from "@/app/_components/Footer";
-import Header from "@/app/_components/Header";
 import Toprated from "@/app/_components/Toprated";
 import response from "@/app/_util/response";
 

@@ -1,5 +1,4 @@
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { ToggleTheme } from "./theme-provider";
 import Genre from "./Genres";
 import Link from "next/link";

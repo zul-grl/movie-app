@@ -1,8 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import SearchPage from "./SearchResult";
-import { useSearchParams } from "next/navigation";
 import {
   Popover,
   PopoverContent,
@@ -10,11 +9,8 @@ import {
 } from "@/components/ui/popover";
 
 const Search = () => {
-  const searchParams = useSearchParams();
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-
-  const search = searchParams.get("value");
 
   return (
     <>

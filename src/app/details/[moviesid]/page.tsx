@@ -1,7 +1,7 @@
 import Similar from "@/app/_components/Similar";
 import { formatRuntime } from "@/app/_util/constant";
 import response from "@/app/_util/response";
-import { CastMember, credittype, crewtype, detailtype } from "@/app/_util/type";
+import { CastMember, credittype, detailtype } from "@/app/_util/type";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Youtube from "../components/Youtube";
@@ -25,7 +25,7 @@ const page = async ({ params }: { params: { moviesid: string } }) => {
     .filter((member) => member.known_for_department === "Writing")
     .map((writer) => writer.name);
   const stars = cast.slice(0, 5).map((star: CastMember) => star.name);
-  console.log(cast);
+  console.log(videodata);
 
   return (
     <div>

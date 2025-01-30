@@ -21,6 +21,7 @@ const SearchPage = async ({
     `/search/movie?query=${searchValue}&language=en-US&page=${page}`
   );
   const movies: Movietype[] = data.results;
+  const searchedMovies = data.total_pages;
   const filteredMovies =
     selectedGenres.length > 0
       ? movies.filter((movie) =>
@@ -36,7 +37,7 @@ const SearchPage = async ({
       <div className="flex gap-7">
         <div className="flex flex-col gap-8 w-full max-w-[804px]">
           <h4 className="text-[20px] font-semibold">
-            {filteredMovies.length} results for &#34;{searchValue}&#34;
+            {searchedMovies} results for &#34;{searchValue}&#34;
           </h4>
           <div className="grid grid-cols-4 gap-[32px] max-w-[804px] mt-[32px]">
             {filteredMovies?.map((movie: Movietype) => {

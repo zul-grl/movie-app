@@ -13,26 +13,29 @@ const Search = () => {
   const [searchValue, setSearchValue] = useState("");
 
   return (
-    <>
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <Input
-            type="text"
-            placeholder="Search movies..."
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-            onFocus={() => setOpen(true)}
-            onBlur={() => setOpen(false)}
-          />
-        </PopoverTrigger>
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Input
+          type="text"
+          placeholder="Search movies..."
+          value={searchValue}
+          onChange={(e) => {
+            setSearchValue(e.target.value);
+            setOpen(e.target.value.length > 0);
+          }}
+          onFocus={() => setOpen(true)}
+        />
+      </PopoverTrigger>
 
-        {searchValue.length > 0 && (
-          <PopoverContent className="flex flex-col w-[577px] bg-background border rounded-md h-[705px] p-3">
-            <SearchPage searchValue={searchValue} />
-          </PopoverContent>
-        )}
-      </Popover>
-    </>
+      {open && searchValue.length > 0 && (
+        <PopoverContent
+          className="flex flex-col w-[577px] bg-background border rounded-md h-[705px] p-3"
+          onOpenAutoFocus={(e) => e.preventDefault()}
+        >
+          <SearchPage searchValue={searchValue} />
+        </PopoverContent>
+      )}
+    </Popover>
   );
 };
 

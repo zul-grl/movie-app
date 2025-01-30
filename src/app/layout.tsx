@@ -4,6 +4,7 @@ import { ThemeProvider } from "./_components/theme-provider";
 import { ReactNode } from "react";
 import Header from "./_components/Header";
 import Footer from "./_components/Footer";
+import { PaginationDemo } from "./_components/Pagination";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           >
             <Header />
             {children}
+            <PaginationDemo />
             <Footer />
           </ThemeProvider>
         </body>

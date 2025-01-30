@@ -4,15 +4,15 @@ import { Movietype } from "../_util/type";
 import Link from "next/link";
 export const MovieCard = ({
   movie,
-  index,
+  key,
 }: {
   movie: Movietype;
-  index: number;
+  key: number;
 }) => {
   return (
     <Link href={`/details/${movie.id}`}>
       <Card
-        key={index}
+        key={key}
         className="flex-1 hover:opacity-50 transition-all ease-in rounded-xl overflow-hidden"
       >
         <div className="max-h-[340px] overflow-hidden">

@@ -1,6 +1,5 @@
 import Allgenres from "@/app/_components/Allgenres";
 import { MovieCard } from "@/app/_components/MovieCard";
-import { PaginationDemo } from "@/app/_components/Pagination";
 import response from "@/app/_util/response";
 import { Movietype } from "@/app/_util/type";
 
@@ -41,11 +40,7 @@ export default async function GenresPage({
                 {movies.length > 0 ? (
                   <>
                     {movies?.map((movie: Movietype) => (
-                      <MovieCard
-                        key={movie.id}
-                        movie={movie}
-                        index={movie.id}
-                      />
+                      <MovieCard key={movie.id} movie={movie} />
                     ))}
                   </>
                 ) : (
@@ -54,7 +49,6 @@ export default async function GenresPage({
               </div>
             )}
           </div>
-          <PaginationDemo />
         </div>
       </div>
     </div>

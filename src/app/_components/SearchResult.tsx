@@ -2,7 +2,7 @@ import response from "@/app/_util/response";
 import { Movietype } from "@/app/_util/type";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { CardContent, CardTitle } from "@/components/ui/card";
+import { CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
@@ -22,11 +22,11 @@ const SearchPage = ({ searchValue }: { searchValue: string }) => {
 
   return (
     <div>
-      {movies?.slice(0, 3).map((movie: Movietype, index: number) => (
+      {movies?.slice(0, 5).map((movie: Movietype, index: number) => (
         <Link key={index} href={`/details/${movie.id}`}>
-          <div className="flex-1 hover:opacity-50 transition-all ease-in rounded-xl overflow-hidden p-2 mt-2">
-            <div className="flex gap-4">
-              <div className="max-h-[100px] w-[67px] overflow-hidden">
+          <div className="flex-1 hover:bg-secondary transition-all ease-in rounded-xl overflow-hidden p-3 mt-2 border-b-2 border ">
+            <div className="flex gap-4 ">
+              <div className="max-h-[130px] w-[67px] rounded-md overflow-hidden">
                 <Image
                   src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                   alt={movie.title}
@@ -35,9 +35,10 @@ const SearchPage = ({ searchValue }: { searchValue: string }) => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <CardContent className="p-2 bg-background h-[85px]">
+              <div className="w-full">
                 <CardTitle className="text-lg">{movie.title}</CardTitle>
-                <div className="flex flex-col gap-2">
+
+                <div className="flex gap-1">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width={16}
@@ -56,17 +57,20 @@ const SearchPage = ({ searchValue }: { searchValue: string }) => {
                     {movie.vote_average.toFixed(1)}
                     <span className="text-muted-foreground">/10</span>
                   </p>
-                  <div className={"flex items-center cursor-pointer text-sm"}>
-                    See more <ArrowRight className="ml-2 w-4 h-4" />
-                  </div>
                 </div>
-              </CardContent>
+
+                <div
+                  className={"flex justify-end w-full cursor-pointer text-sm"}
+                >
+                  See more <ArrowRight className="ml-2 w-4 h-4" />
+                </div>
+              </div>
             </div>
           </div>
         </Link>
       ))}
       <Link href={`/Search?searchValue=${searchValue}`}>
-        <p className="mt-6">See all results for &#34;{searchValue} &#34;</p>
+        <p className="mt-5">See all results for &#34;{searchValue} &#34;</p>
       </Link>
     </div>
   );

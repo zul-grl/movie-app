@@ -5,11 +5,11 @@ import { Movietype } from "../_util/type";
 import SearchGenres from "../_components/SearchGenres";
 import CustomPagination from "../_components/CustomPagination";
 
-const SearchPage = async ({
-  searchParams,
-}: {
-  searchParams: { searchValue: string; genres: string; page?: string };
-}) => {
+interface Props {
+  searchParams: Promise<{ searchValue: string; genres: string; page?: string }>;
+}
+const SearchPage = async (props: Props) => {
+  const searchParams = await props.searchParams;
   const params = await searchParams;
   const searchValue = params.searchValue;
   const selectedGenres = params.genres
@@ -21,11 +21,11 @@ const SearchPage = async ({
     `/search/movie?query=${searchValue}&language=en-US&page=${page}`
   );
   const movies: Movietype[] = data.results;
-  const searchedMovies = data.total_pages;
+  const searchedMovies = data.total_results;
   const filteredMovies =
     selectedGenres.length > 0
       ? movies.filter((movie) =>
-          movie.genre_ids.every((genreId) => selectedGenres.includes(genreId))
+          movie.genre_ids.some((genreId) => selectedGenres.includes(genreId))
         )
       : movies;
   const genreData = await response("/genre/movie/list?language=en");
@@ -36,9 +36,15 @@ const SearchPage = async ({
       <h2 className="text-[30px] font-semibold">Search results</h2>
       <div className="flex gap-7">
         <div className="flex flex-col gap-8 w-full max-w-[804px]">
-          <h4 className="text-[20px] font-semibold">
-            {searchedMovies} results for &#34;{searchValue}&#34;
-          </h4>
+          {selectedGenres.length > 0 ? (
+            <h4 className="text-[20px] font-semibold">
+              {filteredMovies.length} results for &#34;{searchValue}&#34;
+            </h4>
+          ) : (
+            <h4 className="text-[20px] font-semibold">
+              {searchedMovies} results for &#34;{searchValue}&#34;
+            </h4>
+          )}
           <div className="grid grid-cols-4 gap-[32px] max-w-[804px] mt-[32px]">
             {filteredMovies?.map((movie: Movietype) => {
               return <MovieCard key={movie.id} movie={movie} />;

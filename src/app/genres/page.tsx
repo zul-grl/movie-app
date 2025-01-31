@@ -1,10 +1,11 @@
-
 import Allgenres from "@/app/_components/Allgenres";
 import { MovieCard } from "@/app/_components/MovieCard";
 import response from "@/app/_util/response";
 import { Movietype } from "@/app/_util/type";
 import CustomPagination from "../_components/CustomPagination";
-
+interface Props {
+  searchParams: Promise<{ genres: string; page?: string }>;
+}
 async function getMovies(genres: string, page: number) {
   const movies = await response(
     `/discover/movie?language=en&with_genres=${genres}&page=${page}`
@@ -12,11 +13,8 @@ async function getMovies(genres: string, page: number) {
   return movies;
 }
 
-export default async function GenresPage({
-  searchParams,
-}: {
-  searchParams: { genres: string; page?: string };
-}) {
+export default async function GenresPage(props: Props) {
+  const searchParams = await props.searchParams;
   const params = await searchParams;
   const paramPage = params.page;
   const page = Number(paramPage) || 1;

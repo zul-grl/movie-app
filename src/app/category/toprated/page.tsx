@@ -1,12 +1,11 @@
 import CustomPagination from "@/app/_components/CustomPagination";
 import Toprated from "@/app/_components/Toprated";
 import response from "@/app/_util/response";
-
-export default async function TopRatedPage({
-  searchParams,
-}: {
-  searchParams: { page?: string };
-}) {
+interface Props {
+  searchParams: Promise<{ page?: string }>;
+}
+export default async function TopRatedPage(props: Props) {
+  const searchParams = await props.searchParams;
   const page = Number(searchParams.page) || 1;
   const data = await response(`/movie/top_rated?language=en-US&page=${page}`);
   const movies = data.results;

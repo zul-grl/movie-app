@@ -39,12 +39,12 @@ const Allgenres = ({ genreMovies }: { genreMovies: GenreType[] }) => {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-3.5">
         {genreMovies?.map((genre: GenreType) => (
           <Toggle
             key={genre.id}
             onPressedChange={() => handleGenreToggle(genre.id)}
-            className={`flex text-sm rounded-full border items-center px-3 py-1.5 transition-colors
+            className={`flex text-sm rounded-full border items-center px-2 py-1 transition-colors
               ${
                 selectedGenres.includes(genre.id)
                   ? "bg-primary text-primary-foreground border-primary"

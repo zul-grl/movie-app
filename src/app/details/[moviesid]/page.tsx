@@ -5,9 +5,13 @@ import { CastMember, credittype, detailtype } from "@/app/_util/type";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Youtube from "../components/Youtube";
-
-const page = async ({ params }: { params: { moviesid: string } }) => {
+interface Props {
+  params: Promise<{ moviesid: string }>;
+}
+const page = async (props: Props) => {
+  const params = await props.params;
   const movieid = params.moviesid;
+
   const data: detailtype = await response(`/movie/${movieid}?language=en-US`);
   const credits = await response(`/movie/${movieid}/credits?language=en-US`);
   const crew: credittype[] = credits.crew;

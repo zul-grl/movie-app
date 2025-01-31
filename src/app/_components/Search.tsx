@@ -26,10 +26,9 @@ const Search = () => {
           onFocus={() => setOpen(true)}
         />
       </PopoverTrigger>
-
       {open && searchValue.length > 0 && (
         <PopoverContent
-          className="flex flex-col w-[577px] bg-background border rounded-md h-[705px] p-3"
+          className="flex flex-col w-[550px] bg-background border rounded-md h-[670px] p-3"
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
           <SearchPage searchValue={searchValue} />

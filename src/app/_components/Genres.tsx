@@ -11,7 +11,6 @@ import Allgenres from "./Allgenres";
 const Genre = async () => {
   const genreData = await response("/genre/movie/list?language=en");
   const genreMovies = genreData.genres;
-  // console.log(genreMovies);
   return (
     <Popover>
       <PopoverTrigger asChild>

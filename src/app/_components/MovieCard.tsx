@@ -24,7 +24,6 @@ export const MovieCard = ({
             className="w-full h-full object-cover"
           />
         </div>
-
         <CardContent className="p-2 h-[85px] bg-secondary">
           <div className="flex gap-2">
             <svg

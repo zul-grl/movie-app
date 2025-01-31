@@ -17,7 +17,6 @@ interface CustomPaginationProps {
 
 const CustomPagination = ({ page, totalPages }: CustomPaginationProps) => {
   const searchParams = useSearchParams();
-
   const getUpdatedHref = (newPage: number) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", newPage.toString());
@@ -25,7 +24,7 @@ const CustomPagination = ({ page, totalPages }: CustomPaginationProps) => {
   };
 
   const getPageNumbers = (current: number, total: number) => {
-    let pages = [];
+    const pages = [];
     for (let i = 0; i < 3; i++) {
       if (current + i <= total) pages.push(current + i);
     }
@@ -43,7 +42,6 @@ const CustomPagination = ({ page, totalPages }: CustomPaginationProps) => {
             className={page === 1 ? "pointer-events-none opacity-50" : ""}
           />
         </PaginationItem>
-
         {pageNumbers.map((pageNumber) => (
           <PaginationItem key={pageNumber}>
             <PaginationLink href={getUpdatedHref(pageNumber)}>
@@ -51,7 +49,6 @@ const CustomPagination = ({ page, totalPages }: CustomPaginationProps) => {
             </PaginationLink>
           </PaginationItem>
         ))}
-
         <PaginationItem>
           <PaginationNext
             href={getUpdatedHref(Math.min(totalPages, page + 1))}

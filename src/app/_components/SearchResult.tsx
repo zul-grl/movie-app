@@ -24,7 +24,7 @@ const SearchPage = ({ searchValue }: { searchValue: string }) => {
     <div>
       {movies?.slice(0, 5).map((movie: Movietype, index: number) => (
         <Link key={index} href={`/details/${movie.id}`}>
-          <div className="flex-1 hover:bg-secondary transition-all ease-in rounded-xl overflow-hidden p-3 mt-2 border-b-2 border ">
+          <div className="flex-1 hover:bg-secondary transition-all ease-in rounded-xl overflow-hidden p-3 mt-2 ">
             <div className="flex gap-4 ">
               <div className="max-h-[130px] w-[67px] rounded-md overflow-hidden">
                 <Image

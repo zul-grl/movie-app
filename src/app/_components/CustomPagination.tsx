@@ -22,7 +22,6 @@ const CustomPagination = ({ page, totalPages }: CustomPaginationProps) => {
     params.set("page", newPage.toString());
     return `?${params.toString()}`;
   };
-
   const getPageNumbers = (current: number, total: number) => {
     const pages = [];
     for (let i = 0; i < 3; i++) {

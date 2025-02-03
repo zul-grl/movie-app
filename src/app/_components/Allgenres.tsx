@@ -21,7 +21,6 @@ const Allgenres = ({ genreMovies }: { genreMovies: GenreType[] }) => {
 
   const handleGenreToggle = (genreId: number) => {
     let newSelectedGenres: number[];
-
     if (selectedGenres.includes(genreId)) {
       newSelectedGenres = selectedGenres.filter((id) => id !== genreId);
     } else {

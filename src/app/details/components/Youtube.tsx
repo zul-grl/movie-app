@@ -24,7 +24,7 @@ const Youtube = async ({ videodata }: { videodata: Videotype }) => {
         <iframe
           width="560"
           height="315"
-          src={`https://www.youtube.com/embed/${videodata.key}`}
+          src={`https://www.youtube.com/embed/${videodata?.key}`}
         ></iframe>
         <DialogHeader>
           <DialogTitle></DialogTitle>

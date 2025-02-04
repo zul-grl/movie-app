@@ -116,9 +116,7 @@ const page = async (props: Props) => {
           </div>
         </div>
 
-        <div className="flex max-w-[1080px] flex-col mt-8 m-auto gap-8">
-          <Similar id={params.moviesid} movies={similar} a={true} />
-        </div>
+        <Similar id={params.moviesid} movies={similar} a={true} />
       </div>
     </div>
   );

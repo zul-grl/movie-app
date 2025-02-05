@@ -26,7 +26,7 @@ const SearchPage = ({ searchValue }: { searchValue: string }) => {
         <Link key={index} href={`/details/${movie.id}`}>
           <div className="flex-1 hover:bg-secondary transition-all ease-in rounded-xl overflow-hidden p-3 mt-2 ">
             <div className="flex gap-4 ">
-              <div className="max-h-[130px] w-[67px] rounded-md overflow-hidden">
+              <div className="h-[90px] w-[67px] rounded-md overflow-hidden">
                 <Image
                   src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                   alt={movie.title}
@@ -70,7 +70,7 @@ const SearchPage = ({ searchValue }: { searchValue: string }) => {
         </Link>
       ))}
       <Link href={`/Search?searchValue=${searchValue}`}>
-        <p className="mt-5">See all results for &#34;{searchValue} &#34;</p>
+        <p className="mt-3">See all results for &#34;{searchValue} &#34;</p>
       </Link>
     </div>
   );

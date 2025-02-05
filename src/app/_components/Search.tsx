@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import SearchPage from "./SearchResult";
 import {
@@ -7,11 +7,20 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { usePathname, useRouter } from "next/navigation";
 
 const Search = () => {
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const router = useRouter();
+  const pathname = usePathname();
 
+  useEffect(() => {
+    if (pathname === "/search") {
+      router.push(`/Search?searchValue=${searchValue}`);
+    }
+  }, [searchValue]);
+  console.log(pathname);
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>

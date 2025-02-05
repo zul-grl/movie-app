@@ -19,7 +19,7 @@ const SearchPage = ({ searchValue }: { searchValue: string }) => {
 
     fetchMovies();
   }, [searchValue]);
-
+  console.log(searchValue);
   return (
     <div>
       {movies?.slice(0, 5).map((movie: Movietype, index: number) => (

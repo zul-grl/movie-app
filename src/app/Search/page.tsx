@@ -17,9 +17,12 @@ const SearchPage = async (props: Props) => {
     : [];
   const totalPages = 500;
   const page = Number(params.page) || 1;
-  const data = await response(
-    `/search/movie?query=${searchValue}&language=en-US&page=${page}`
-  );
+  const data =
+    searchValue.length > 0
+      ? await response(
+          `/search/movie?query=${searchValue}&language=en-US&page=${page}`
+        )
+      : "";
   const movies: Movietype[] = data.results;
   const searchedMovies = data.total_results;
   const filteredMovies =

@@ -16,11 +16,11 @@ const Search = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (pathname === "/search") {
+    if (pathname === "/search" && searchValue.length > 0) {
       router.push(`/Search?searchValue=${searchValue}`);
     }
-  }, [searchValue]);
-  console.log(pathname);
+  }, [searchValue, pathname, router]);
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -35,7 +35,7 @@ const Search = () => {
           onFocus={() => setOpen(true)}
         />
       </PopoverTrigger>
-      {open && searchValue.length > 0 && (
+      {open && searchValue.length > 0 && pathname !== "/search" && (
         <PopoverContent
           className="flex flex-col w-[550px] bg-background border rounded-md h-[670px] p-3"
           onOpenAutoFocus={(e) => e.preventDefault()}

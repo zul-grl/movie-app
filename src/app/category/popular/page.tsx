@@ -9,7 +9,7 @@ export default async function PopularPage(props: Props) {
 
   const page = Number(searchParams.page) || 1;
   const data = await response(`/movie/popular?language=en-US&page=${page}`);
-  console.log(data);
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   const totalPages = 500;
 
   return (

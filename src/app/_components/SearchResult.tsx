@@ -69,9 +69,13 @@ const SearchPage = ({ searchValue }: { searchValue: string }) => {
           </div>
         </Link>
       ))}
-      <Link href={`/Search?searchValue=${searchValue}`}>
-        <p className="mt-3">See all results for &#34;{searchValue} &#34;</p>
-      </Link>
+      {movies.length > 0 ? (
+        <Link href={`/Search?searchValue=${searchValue}`}>
+          <p className="mt-3">See all results for &#34;{searchValue} &#34;</p>
+        </Link>
+      ) : (
+        <p>No results found.</p>
+      )}
     </div>
   );
 };

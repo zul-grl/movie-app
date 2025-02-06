@@ -33,7 +33,6 @@ const SearchPage = async (props: Props) => {
       : movies;
   const genreData = await response("/genre/movie/list?language=en");
   const genreMovies = genreData.genres;
-
   return (
     <div className="max-w-[1280px] m-auto flex flex-col gap-8 mt-[52px]">
       <h2 className="text-[30px] font-semibold">Search results</h2>
@@ -48,11 +47,17 @@ const SearchPage = async (props: Props) => {
               {searchedMovies} results for &#34;{searchValue}&#34;
             </h4>
           )}
-          <div className="grid grid-cols-4 gap-[32px] max-w-[804px] mt-[32px]">
-            {filteredMovies?.map((movie: Movietype) => {
-              return <MovieCard key={movie.id} movie={movie} />;
-            })}
-          </div>
+          {filteredMovies.length > 0 ? (
+            <div className="grid grid-cols-4 gap-[32px] max-w-[804px] mt-[32px]">
+              {filteredMovies?.map((movie: Movietype) => {
+                return <MovieCard key={movie.id} movie={movie} />;
+              })}
+            </div>
+          ) : (
+            <div className="justify-center">
+              <p> No results found.</p>
+            </div>
+          )}
         </div>
         <Card className="rounded-md w-[360px] h-[370px] border-none shadow-none">
           <h3 className="text-[24px]">Search by genre</h3>

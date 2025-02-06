@@ -9,6 +9,7 @@ export default async function UpcomingPage(props: Props) {
   const searchParams = await props.searchParams;
   const page = Number(searchParams.page) || 1;
   const data = await response(`/movie/upcoming?language=en-US&page=${page}`);
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   const movies = data.results;
 
   return (

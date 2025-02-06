@@ -10,7 +10,7 @@ export default async function Home() {
   const popularMovies = popularData.results.slice(0, 10);
   const upcomingMovies = upcomingData.results.slice(0, 10);
   const topRatedMovies = topRatedData.results.slice(0, 10);
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   return (
     <div className="h-full w-full">
       <NowPlaying />

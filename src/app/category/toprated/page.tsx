@@ -9,7 +9,7 @@ export default async function TopRatedPage(props: Props) {
   const page = Number(searchParams.page) || 1;
   const data = await response(`/movie/top_rated?language=en-US&page=${page}`);
   const movies = data.results;
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  await new Promise((resolve) => setTimeout(resolve, 1500));
   const totalPages = 500;
 
   return (

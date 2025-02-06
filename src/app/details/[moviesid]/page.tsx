@@ -29,7 +29,7 @@ const page = async (props: Props) => {
     .filter((member) => member.known_for_department === "Writing")
     .map((writer) => writer.name);
   const stars = cast.slice(0, 5).map((star: CastMember) => star.name);
-  await new Promise((resolve) => setTimeout(resolve, 5000));
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 
   return (
     <div>

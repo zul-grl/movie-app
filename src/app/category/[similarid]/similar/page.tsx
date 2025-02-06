@@ -17,7 +17,7 @@ const Similarpage = async (props: Props) => {
     `/movie/${movieid}/similar?language=en-US&page=${page}`
   );
   const similar = similarMovies.results;
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  await new Promise((resolve) => setTimeout(resolve, 1500));
 
   return (
     <>

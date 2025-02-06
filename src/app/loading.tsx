@@ -10,8 +10,8 @@ export default function Loading() {
           <Skeleton className="rounded-full w-[230px] h-8" />
         </div>
         <div className="grid grid-cols-5 gap-[32px] mt-[32px]">
-          {Array.from({ length: 10 }, (_, i) => {
-            return <Skeleton className="w-[228px] h-[387px]" />;
+          {Array.from({ length: 10 }, (_: unknown, i: number) => {
+            return <Skeleton key={i} className="w-[228px] h-[387px]" />;
           })}
         </div>
         <div className="flex justify-between mt-[52px]">
@@ -19,8 +19,8 @@ export default function Loading() {
           <Skeleton className="rounded-full w-[230px] h-8" />
         </div>
         <div className="grid grid-cols-5 gap-[32px] mt-[32px]">
-          {Array.from({ length: 10 }, (_, i) => {
-            return <Skeleton className="w-[228px] h-[387px]" />;
+          {Array.from({ length: 10 }, (_: unknown, i: number) => {
+            return <Skeleton key={i} className="w-[228px] h-[387px]" />;
           })}
         </div>
         <div className="flex justify-between mt-[52px]">
@@ -28,8 +28,8 @@ export default function Loading() {
           <Skeleton className="rounded-full w-[230px] h-8" />
         </div>
         <div className="grid grid-cols-5 gap-[32px] mt-[32px]">
-          {Array.from({ length: 10 }, (_, i) => {
-            return <Skeleton className="w-[228px] h-[387px]" />;
+          {Array.from({ length: 10 }, (_: unknown, i: number) => {
+            return <Skeleton key={i} className="w-[228px] h-[387px]" />;
           })}
         </div>
       </div>

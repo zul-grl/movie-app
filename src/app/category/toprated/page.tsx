@@ -11,6 +11,7 @@ export default async function TopRatedPage(props: Props) {
   const movies = data.results;
   await new Promise((resolve) => setTimeout(resolve, 1500));
   const totalPages = 500;
+  console.log(movies);
 
   return (
     <>
